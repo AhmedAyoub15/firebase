@@ -58,8 +58,15 @@ class _SignInState extends State<SignIn> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      print(email);
-                      print(password);
+                      // print(email);
+                      // print(password);
+                      dynamic result = await _auth.registerWithEmailAndPassword(
+                          email, password);
+                      if (result == null) {
+                        setState(() {
+                          error = 'Please supply a valid email';
+                        });
+                      }
                     }
                   }),
             ],
