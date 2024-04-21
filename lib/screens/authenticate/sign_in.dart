@@ -69,6 +69,11 @@ class _SignInState extends State<SignIn> {
                       }
                     }
                   }),
+              SizedBox(height: 12.0),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14.0),
+              )
             ],
           ),
         ),
