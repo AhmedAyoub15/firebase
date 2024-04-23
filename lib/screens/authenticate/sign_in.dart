@@ -60,11 +60,13 @@ class _SignInState extends State<SignIn> {
                     if (_formKey.currentState!.validate()) {
                       // print(email);
                       // print(password);
-                      dynamic result = await _auth.registerWithEmailAndPassword(
+                      // dynamic result = await _auth.registerWithEmailAndPassword(
+                      dynamic result = await _auth.signInWithEmailAndPassword(
                           email, password);
                       if (result == null) {
                         setState(() {
-                          error = 'Please supply a valid email';
+                          // error = 'Please supply a valid email';
+                          error = 'could not sign in with those credentials';
                         });
                       }
                     }

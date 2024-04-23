@@ -29,6 +29,20 @@ class AuthService {
   }
 
   // sign in with email and password
+  //this way we need to sign in with pre existing account
+  Future signInWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+  // register with email and password
+
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
@@ -40,7 +54,6 @@ class AuthService {
       return null;
     }
   }
-  // register with email and password
 
   // sign out
   Future signOut() async {
