@@ -80,7 +80,7 @@ class _SignInState extends State<SignIn> {
                         ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            // setState(() => loading = true);
+                            setState(() => loading = true);
                             // print(email);
                             // print(password);
                             // register new account
