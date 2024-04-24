@@ -30,35 +30,7 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: StreamBuilder<List<Brew>>(
-          stream: DatabaseService().brews,
-          builder: (BuildContext context, AsyncSnapshot<List<Brew>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting ||
-                snapshot.data == null) {
-              return Loading();
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else {
-              // QuerySnapshot brews = snapshot.data!;
-              // Your widget that uses the snapshot data
-              // Replace Container() with your widget
-              // print(brews);
-              // print(brews.docs);
-              // Print the documents of the QuerySnapshot
-              // for (var doc in brews.docs) {
-              //   print('Document data: ${doc.data()}');
-              //   // Print each field of the document
-              //   print(doc['name']);
-              // }
-              List<Brew> brews = snapshot.data!;
-              brews.forEach((brew) {
-                print(brew.name);
-                print(brew.sugars);
-              });
-
-              return Container();
-            }
-          }),
+      body: BrewsList(),
     );
   }
 }
