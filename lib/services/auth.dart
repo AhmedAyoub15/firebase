@@ -6,8 +6,9 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // // create user obj based on firebase user
-  USER? _userFromFirebaseUser(User? user) {
-    return user != null ? USER(uid: user.uid) : null;
+  // The role parameter is optional because it’s enclosed in square brackets []
+  USER? _userFromFirebaseUser(User? user, [String? role]) {
+    return user != null ? USER(uid: user.uid, role: role) : null;
   }
 
   Stream<USER?> get users {
@@ -44,14 +45,14 @@ class AuthService {
   }
   // register with email and password
 
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(
+      String email, String password, String role) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
       print(user!.uid);
-      await DatabaseService(uid: user.uid)
-          .updateUserData('0', 'new crew member', 100);
+      await DatabaseService(uid: user.uid).updateUserData(role, 'username');
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());

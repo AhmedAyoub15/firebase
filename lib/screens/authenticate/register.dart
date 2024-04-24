@@ -21,7 +21,7 @@ class _RegisterState extends State<Register> {
 // for the rool dropbutthon
   List<String> Rools = <String>['Admin', 'Medcin', 'ParaMedical', 'Patient'];
   String _currentItemSelected = "Medcin";
-  String rool = '';
+  String role = '';
 
   @override
   Widget build(BuildContext context) {
@@ -38,114 +38,107 @@ class _RegisterState extends State<Register> {
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
               child: Form(
                 key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(height: 20.0),
-                    TextFormField(
-                      decoration:
-                          textInputDecoration.copyWith(hintText: 'Email'),
-                      //  InputDecoration(
-                      //     hintText: 'Email',
-                      //     fillColor: Colors.white,
-                      //     filled: true,
-                      //     enabledBorder: OutlineInputBorder(
-                      //         borderSide: BorderSide(
-                      //       color: Colors.black,
-                      //       width: 2.0,
-                      //     )),
-                      //     focusedBorder: OutlineInputBorder(
-                      //         borderSide: BorderSide(color: Colors.red, width: 2.0))),
-                      validator: (val) =>
-                          val!.isEmpty ? 'Enter an email' : null,
-                      onChanged: (val) {
-                        setState(() => email = val);
-                      },
-                    ),
-                    SizedBox(height: 20.0),
-                    TextFormField(
-                      decoration:
-                          textInputDecoration.copyWith(hintText: 'Password'),
-                      validator: (val) => val!.length < 6
-                          ? 'Enter a password 6+ chars long'
-                          : null,
-                      obscureText: true,
-                      onChanged: (val) {
-                        setState(() => password = val);
-                      },
-                    ),
-                    SizedBox(height: 20.0),
-                    Row(children: <Widget>[
-                      Text(
-                        "Rool : ",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 68, 31, 142),
-                        ),
-                      ),
-                      DropdownButton<String>(
-                        dropdownColor: const Color.fromARGB(255, 81, 131, 206),
-                        isDense: true,
-                        isExpanded: false,
-                        iconEnabledColor: Color.fromARGB(255, 144, 22, 237),
-                        focusColor: Color.fromARGB(255, 26, 30, 64),
-                        items: Rools.map((String dropDownStringItem) {
-                          return DropdownMenuItem<String>(
-                            value: dropDownStringItem,
-                            child: Text(
-                              dropDownStringItem,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 22, 24, 33),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (newValueSelected) {
-                          setState(() {
-                            _currentItemSelected = newValueSelected!;
-                            rool = newValueSelected;
-                          });
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: 20.0),
+                      TextFormField(
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'Email'),
+                        validator: (val) =>
+                            val!.isEmpty ? 'Enter an email' : null,
+                        onChanged: (val) {
+                          setState(() => email = val);
                         },
-                        value: _currentItemSelected,
                       ),
-                    ]),
-                    SizedBox(height: 20.0),
-                    ElevatedButton(
-                        // color: Colors.pink[400],
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.pink[400]),
-                        child: Text(
-                          'Register',
-                          style: TextStyle(color: Colors.white),
+                      SizedBox(height: 20.0),
+                      TextFormField(
+                        decoration:
+                            textInputDecoration.copyWith(hintText: 'Password'),
+                        validator: (val) => val!.length < 6
+                            ? 'Enter a password 6+ chars long'
+                            : null,
+                        obscureText: true,
+                        onChanged: (val) {
+                          setState(() => password = val);
+                        },
+                      ),
+                      SizedBox(height: 20.0),
+                      Row(children: <Widget>[
+                        Text(
+                          "Rool : ",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 68, 31, 142),
+                          ),
                         ),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            setState(() => loading = true);
-                            // print(email);
-                            // print(password);
-                            // register new account
-                            dynamic result = await _auth
-                                .registerWithEmailAndPassword(email, password);
-                            //sign in to an existing account
-                            // dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                            if (result == null) {
-                              setState(() {
-                                // error = 'Please supply a valid email';
-                                loading = false;
-                                error =
-                                    'could not Register with those credentials';
-                              });
+                        DropdownButton<String>(
+                          dropdownColor:
+                              const Color.fromARGB(255, 81, 131, 206),
+                          isDense: true,
+                          isExpanded: false,
+                          iconEnabledColor: Color.fromARGB(255, 144, 22, 237),
+                          focusColor: Color.fromARGB(255, 26, 30, 64),
+                          items: Rools.map((String dropDownStringItem) {
+                            return DropdownMenuItem<String>(
+                              value: dropDownStringItem,
+                              child: Text(
+                                dropDownStringItem,
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 22, 24, 33),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValueSelected) {
+                            setState(() {
+                              _currentItemSelected = newValueSelected!;
+                              role = newValueSelected;
+                            });
+                          },
+                          value: _currentItemSelected,
+                        ),
+                      ]),
+                      SizedBox(height: 20.0),
+                      ElevatedButton(
+                          // color: Colors.pink[400],
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.pink[400]),
+                          child: Text(
+                            'Register',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              setState(() => loading = true);
+                              // print(email);
+                              // print(password);
+                              // register new account
+                              dynamic result =
+                                  await _auth.registerWithEmailAndPassword(
+                                      email, password, role);
+                              //sign in to an existing account
+                              // dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                              if (result == null) {
+                                setState(() {
+                                  // error = 'Please supply a valid email';
+                                  loading = false;
+                                  error =
+                                      'could not Register with those credentials';
+                                });
+                              }
                             }
-                          }
-                        }),
-                    SizedBox(height: 12.0),
-                    Text(
-                      error,
-                      style: TextStyle(color: Colors.red, fontSize: 14.0),
-                    )
-                  ],
+                          }),
+                      SizedBox(height: 12.0),
+                      Text(
+                        error,
+                        style: TextStyle(color: Colors.red, fontSize: 14.0),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

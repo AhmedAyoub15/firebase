@@ -85,7 +85,7 @@ class _SignInState extends State<SignIn> {
                             // print(password);
                             // register new account
                             dynamic result = await _auth
-                                .registerWithEmailAndPassword(email, password);
+                                .signInWithEmailAndPassword(email, password);
                             //sign in to an existing account
                             // dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                             if (result == null) {
