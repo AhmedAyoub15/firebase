@@ -7,7 +7,7 @@ import 'package:firebase/services/database.dart';
 import 'package:firebase/shared/loading.dart';
 import 'package:flutter/material.dart';
 
-class BrewsList extends StatelessWidget {
+class UsersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<USER>>(

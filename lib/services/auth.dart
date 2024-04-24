@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase/models/user.dart';
@@ -37,12 +38,21 @@ class AuthService {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      return _userFromFirebaseUser(user);
+      // Fetch the role of the user from Firestore
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('utilisateurs')
+          .doc(user?.uid)
+          .get();
+      String? role = snapshot['role'];
+      print("role in auth signin is : ${role}");
+
+      return _userFromFirebaseUser(user, role);
     } catch (error) {
       print(error.toString());
       return null;
     }
   }
+
   // register with email and password
 
   Future registerWithEmailAndPassword(

@@ -10,8 +10,9 @@ class Authenticate extends StatefulWidget {
 class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Register()
-        // SignIn()
-        );
+    return Container(
+        child:
+            // Register()
+            SignIn());
   }
 }

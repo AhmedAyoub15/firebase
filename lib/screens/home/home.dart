@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: BrewsList(),
+      body: UsersList(),
     );
   }
 }
