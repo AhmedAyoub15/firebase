@@ -19,45 +19,20 @@ void routeToPageBasedOnRole(BuildContext context) {
       print("role in routing is : $role");
       switch (role) {
         case 'Admin':
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AdminPage(),
-            ),
-          );
+          Navigator.pushNamed(context, '/admin');
           break;
         case 'Medcin':
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MedcinPage(),
-            ),
-          );
+          Navigator.pushNamed(context, '/medcin');
           break;
         case 'Patient':
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PatientPage(),
-            ),
-          );
+          Navigator.pushNamed(context, '/patient');
           break;
         case 'ParaMedical':
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ParaMedicalPage(),
-            ),
-          );
+          Navigator.pushNamed(context, '/paraMedical');
           break;
         // Add more cases here for other roles
         default:
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Home(),
-            ),
-          );
+          Navigator.pushNamed(context, '/home');
       }
     }
   });
