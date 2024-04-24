@@ -18,6 +18,10 @@ class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
   bool loading = false;
+// for the rool dropbutthon
+  List<String> Rools = <String>['Admin', 'Medcin', 'ParaMedical', 'Patient'];
+  String _currentItemSelected = "Medcin";
+  String rool = '';
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +73,44 @@ class _RegisterState extends State<Register> {
                         setState(() => password = val);
                       },
                     ),
+                    SizedBox(height: 20.0),
+                    Row(children: <Widget>[
+                      Text(
+                        "Rool : ",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 68, 31, 142),
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: const Color.fromARGB(255, 81, 131, 206),
+                        isDense: true,
+                        isExpanded: false,
+                        iconEnabledColor: Color.fromARGB(255, 144, 22, 237),
+                        focusColor: Color.fromARGB(255, 26, 30, 64),
+                        items: Rools.map((String dropDownStringItem) {
+                          return DropdownMenuItem<String>(
+                            value: dropDownStringItem,
+                            child: Text(
+                              dropDownStringItem,
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 22, 24, 33),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (newValueSelected) {
+                          setState(() {
+                            _currentItemSelected = newValueSelected!;
+                            rool = newValueSelected;
+                          });
+                        },
+                        value: _currentItemSelected,
+                      ),
+                    ]),
                     SizedBox(height: 20.0),
                     ElevatedButton(
                         // color: Colors.pink[400],
