@@ -14,4 +14,9 @@ class DatabaseService {
       'strength': strength,
     });
   }
+
+  //setup a stream to listen to any change in the database
+  Stream<QuerySnapshot> get brews {
+    return brewCollection.snapshots();
+  }
 }
