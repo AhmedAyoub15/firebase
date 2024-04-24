@@ -42,12 +42,15 @@ class Home extends StatelessWidget {
               QuerySnapshot brews = snapshot.data!;
               // Your widget that uses the snapshot data
               // Replace Container() with your widget
-              print(brews);
-              print(brews.docs);
+              // print(brews);
+              // print(brews.docs);
               // Print the documents of the QuerySnapshot
               for (var doc in brews.docs) {
                 print('Document data: ${doc.data()}');
+                // Print each field of the document
+                print(doc['name']);
               }
+
               return Container();
             }
           }),
