@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase/models/brew.dart';
 import 'package:firebase/screens/home/brew_list.dart';
 import 'package:firebase/services/auth.dart';
 import 'package:firebase/services/database.dart';
@@ -29,27 +30,31 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: StreamBuilder<QuerySnapshot>(
+      body: StreamBuilder<List<Brew>>(
           stream: DatabaseService().brews,
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<List<Brew>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting ||
                 snapshot.data == null) {
               return Loading();
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              QuerySnapshot brews = snapshot.data!;
+              // QuerySnapshot brews = snapshot.data!;
               // Your widget that uses the snapshot data
               // Replace Container() with your widget
               // print(brews);
               // print(brews.docs);
               // Print the documents of the QuerySnapshot
-              for (var doc in brews.docs) {
-                print('Document data: ${doc.data()}');
-                // Print each field of the document
-                print(doc['name']);
-              }
+              // for (var doc in brews.docs) {
+              //   print('Document data: ${doc.data()}');
+              //   // Print each field of the document
+              //   print(doc['name']);
+              // }
+              List<Brew> brews = snapshot.data!;
+              brews.forEach((brew) {
+                print(brew.name);
+                print(brew.sugars);
+              });
 
               return Container();
             }
