@@ -66,7 +66,7 @@ class _RegisterState extends State<Register> {
                       SizedBox(height: 20.0),
                       Row(children: <Widget>[
                         Text(
-                          "Rool : ",
+                          "Role : ",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
